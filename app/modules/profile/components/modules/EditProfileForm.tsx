@@ -17,6 +17,9 @@ import Joi from "joi";
 import { joiResolver } from "@hookform/resolvers/joi";
 import { ChevronLeftIcon } from "@chakra-ui/icons";
 import { SubmitHandler, useForm } from "react-hook-form";
+import axios from "axios";
+import { mutate } from "swr";
+import { useSession } from "next-auth/client";
 
 interface FormInput {
   name: string;
@@ -27,7 +30,7 @@ interface FormInput {
 
 const schema = Joi.object({
   name: Joi.string().required(),
-  bio: Joi.string().allow("").optional(),
+  bio: Joi.string().empty("").optional(),
   phone: Joi.string()
     .empty("")
     .length(10)
@@ -49,6 +52,7 @@ interface Props {
 }
 
 const EditProfileForm: React.FC<Props> = ({ setIsEditing }) => {
+  const [session, loading] = useSession();
   const {
     register,
     handleSubmit,
@@ -59,7 +63,8 @@ const EditProfileForm: React.FC<Props> = ({ setIsEditing }) => {
   });
 
   const onSubmit: SubmitHandler<FormInput> = async (data) => {
-    console.log(data);
+    await axios.post("/api/profiles", data);
+    mutate(`/api/profiles/${session?.userId as string}`);
     setIsEditing(false);
   };
 

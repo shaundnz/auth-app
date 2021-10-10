@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=authapp_user
+      - POSTGRES_PASSWORD=authapp_pass
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  postgres:

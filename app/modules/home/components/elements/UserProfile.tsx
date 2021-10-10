@@ -9,8 +9,13 @@ import {
   HStack,
   VStack,
 } from "@chakra-ui/react";
+import User from "../../../../common/types/user";
 
-const UserProfile = () => {
+interface Props {
+  user: User;
+}
+
+const UserProfile: React.FC<Props> = ({ user }) => {
   return (
     <HStack
       spacing="3"
@@ -19,10 +24,11 @@ const UserProfile = () => {
       borderWidth="2px"
       boxShadow="0 4px 4px 0 rgba(0,0,0,0.1)"
       p="4"
+      minW="md"
     >
       <Square size="150px">
         <Image
-          src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+          src={user.imageUrl}
           w="100%"
           h="100%"
           borderRadius="full"
@@ -30,27 +36,35 @@ const UserProfile = () => {
         />
       </Square>
       <VStack align="flex-start">
-        <Heading size="md" as="h4">
-          Name: Xanthe Neal
-        </Heading>
-        <HStack>
-          <Heading size="sm" as="h5">
-            Bio:
+        {user.name ? (
+          <Heading size="md" as="h4">
+            Name: {user.name}
           </Heading>
-          <Text>This is my bio, very cool!!</Text>
-        </HStack>
-        <HStack>
-          <Heading size="sm" as="h5">
-            Phone:
-          </Heading>
-          <Text>012 3456 789</Text>
-        </HStack>
-        <HStack>
-          <Heading size="sm" as="h5">
-            Email:
-          </Heading>
-          <Text>xanthe.neal@gmail.com</Text>
-        </HStack>
+        ) : null}
+        {user.bio ? (
+          <HStack>
+            <Heading size="sm" as="h5">
+              Bio:
+            </Heading>
+            <Text>{user.bio}</Text>
+          </HStack>
+        ) : null}
+        {user.phone ? (
+          <HStack>
+            <Heading size="sm" as="h5">
+              Phone:
+            </Heading>
+            <Text>{user.phone}</Text>
+          </HStack>
+        ) : null}
+        {user.email ? (
+          <HStack>
+            <Heading size="sm" as="h5">
+              Email:
+            </Heading>
+            <Text>{user.email}</Text>
+          </HStack>
+        ) : null}
       </VStack>
     </HStack>
   );

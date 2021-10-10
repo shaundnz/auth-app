@@ -14,6 +14,8 @@
     "@emotion/styled": "^11.3.0",
     "@fontsource/noto-sans": "^4.5.1",
     "@hookform/resolvers": "^2.8.1",
+    "@prisma/client": "^2.30.3",
+    "axios": "^0.22.0",
     "framer-motion": "^4.1.17",
     "joi": "^17.4.2",
     "next": "11.1.2",
@@ -26,6 +28,7 @@
   },
   "devDependencies": {
     "@types/react": "17.0.27",
+    "prisma": "^3.2.1",
     "typescript": "4.4.3"
   }
 }

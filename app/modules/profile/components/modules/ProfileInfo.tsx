@@ -15,12 +15,14 @@ import {
   Square,
   Image,
 } from "@chakra-ui/react";
+import User from "../../../../common/types/user";
 
 interface Props {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  user: User;
 }
 
-const ProfileInfo: React.FC<Props> = ({ setIsEditing }) => {
+const ProfileInfo: React.FC<Props> = ({ setIsEditing, user }) => {
   return (
     <VStack spacing="7" py={[4, 12]} px={[0, 12]}>
       <VStack>
@@ -38,7 +40,7 @@ const ProfileInfo: React.FC<Props> = ({ setIsEditing }) => {
         <Table variant="simple">
           <Tbody>
             <Tr>
-              <Td colspan="2">
+              <Td colSpan={2}>
                 <Flex justify="space-between" align="center">
                   <VStack align="flex-start">
                     <Heading size="lg" as="h4" fontWeight="medium">
@@ -60,7 +62,7 @@ const ProfileInfo: React.FC<Props> = ({ setIsEditing }) => {
               <Td>
                 <Square size="100px">
                   <Image
-                    src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+                    src={user.imageUrl}
                     w="100%"
                     h="100%"
                     borderRadius="xl"
@@ -71,19 +73,19 @@ const ProfileInfo: React.FC<Props> = ({ setIsEditing }) => {
             </Tr>
             <Tr>
               <Td color="app.light">Name</Td>
-              <Td>Xanthe Neal</Td>
+              <Td>{user.name}</Td>
             </Tr>
             <Tr>
               <Td color="app.light">Bio</Td>
-              <Td>This is my bio, very cool!!</Td>
+              <Td>{user.bio}</Td>
             </Tr>
             <Tr>
               <Td color="app.light">Phone</Td>
-              <Td>021 1234 5678</Td>
+              <Td>{user.phone}</Td>
             </Tr>
             <Tr>
               <Td color="app.light">Email</Td>
-              <Td>xanthe.neal@gmail.com</Td>
+              <Td>{user.email}</Td>
             </Tr>
           </Tbody>
         </Table>

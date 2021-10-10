@@ -14,13 +14,19 @@ import { TriangleDownIcon, TriangleUpIcon } from "@chakra-ui/icons";
 import { BsPersonCircle } from "react-icons/bs";
 import { MdLogout } from "react-icons/md";
 import React from "react";
+import { signOut } from "next-auth/client";
 
-const HeaderMenu = () => {
+interface Props {
+  name: string;
+  imageUrl: string;
+}
+
+const HeaderMenu: React.FC<Props> = ({ name, imageUrl }) => {
   return (
     <HStack align="center" spacing="1">
       <Square size="50px">
         <Image
-          src="https://t4.ftcdn.net/jpg/03/64/21/11/360_F_364211147_1qgLVxv1Tcq0Ohz3FawUfrtONzz8nq3e.jpg"
+          src={imageUrl}
           w="100%"
           h="100%"
           borderRadius="xl"
@@ -41,14 +47,18 @@ const HeaderMenu = () => {
               rightIcon={isOpen ? <TriangleUpIcon /> : <TriangleDownIcon />}
             >
               <Heading size="sm" as="h5" pl="2">
-                Xanthe Neal
+                {name}
               </Heading>
             </MenuButton>
             <MenuList>
-              <Link href="profile">
+              <Link href="/profile">
                 <MenuItem icon={<BsPersonCircle />}>My Profile</MenuItem>
               </Link>
-              <MenuItem color="#EB5757" icon={<MdLogout />}>
+              <MenuItem
+                color="#EB5757"
+                icon={<MdLogout />}
+                onClick={() => signOut()}
+              >
                 Logout
               </MenuItem>
             </MenuList>
